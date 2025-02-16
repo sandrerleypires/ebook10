@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        form {
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            padding: 50px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-radius: 8px;
+        }
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 50px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .exit-btn {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Diálogo para Apoio à Decisão</h1>
+	<h2>Responde sobre o sistema de vendas - Introdução a Machine Learning e Redes Neurais</h2>
+    <form method="POST">
+        <label for="question">Pergunta:</label><br>
+        <input type="text" id="question" name="question" placeholder="Digite sua pergunta aqui..." value="{{ question }}"><br>
+        <label for="response">Resposta:</label><br>
+        <textarea id="response" name="response" rows="8" readonly>{{ response }}</textarea><br>
+        <button type="submit" name="submit" class="submit-btn">Enviar</button>
+        <button type="submit" name="exit" class="exit-btn">Sair</button>
+    </form>
+</body>
+</html>

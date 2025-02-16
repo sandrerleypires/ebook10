@@ -1,0 +1,5 @@
+{
+  "prompt": "Você receberá uma relação de informações a respeito de um determinado tema. Estas informações devem ser suficientes para responder à seguinte pergunta: \n <question> \nA resposta deve ser clara e detalhada, descrita em cerca de três a quatro linhas. No caso de perguntas compostas, use este esse limite para cada questão componente. \nSegue a relação de textos que descreve o contexto de origem das respostas: \n <contend>",
+  "local_bd": ".\\chroma_db",
+  "collection": ["books"]
+}

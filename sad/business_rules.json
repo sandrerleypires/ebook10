@@ -1,0 +1,15 @@
+{
+"origin": "business rules",
+"collection": "business_rules",
+"local_bd": ".\\chroma_db",
+"rules": [
+
+{"name": "saldo devedor de um cliente",
+ "rule": "O 'saldo devedor' de um cliente e determinado da seguinte forma: \n1) Obter o somátorio do 'valor total de venda' de todas as vendas feita ao 'cliente comprador', gerando o 'total de débito'.\n2) Obter o somátorio dos valores de 'pago na conta' gerando o 'total de crédito'. \n3) O saldo devedor do cliente será determinado pela diferença entre o 'total de crétido' e o 'total de débito'."
+},
+{"name": "cliente em atraso",
+ "rule": "Um 'cliente comprador' está em atraso caso o seu 'saldo devedor' seja diferente de zeros e a 'data de pagamento' mais recente tenha ocorrido a mais de 30 antes da data <hoje>."
+}
+
+]
+}

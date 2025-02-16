@@ -1,0 +1,11 @@
+{
+  "sql": "\n         select p.pedido_id as id, p.data_pedido, p.status, tv.total_venda,\n                pg.valor_pago, pg.data_pagamento, pg.metodo_pagamento, \n                ip.quantidade, ip.preco_unitario, ip.subtotal, \n                pr.nome as produto, pr.categoria, c.nome, (tv.total_venda - pg.valor_pago) as debito \n         from   ebook.pedidos p \n                inner join (select ip.pedido_id, sum(ip.subtotal) total_venda \n                            from ebook.itens_pedido ip \n                            group by ip.pedido_id) tv on  tv.pedido_id = p.pedido_id\n                inner join ebook.clientes c on p.cliente_id = c.cliente_id \n                inner join ebook.pagamentos pg on pg.pedido_id = p.pedido_id \n                inner join ebook.itens_pedido ip on ip.pedido_id = p.pedido_id \n                inner join ebook.produtos pr on pr.produto_id = ip.produto_id \n         order by p.pedido_id, ip.item_id",
+  
+  "origin": "pedido",
+
+  "bd": "postgresql://postgres:postgres@localhost:5432/postgres",
+  
+  "local_bd": ".\\chroma_db",
+ 
+  "template": "A venda de número <pedido_id> foi realizada no dia <data_pedido> com valor total de <total_venda>. O cliente comprador foi <nome>, pagando a sua conta com <metodo_pagamento> na data de <data_pagamento>. O valor pago foi de R$<valor_pago>, sendo que ainda faltam R$<debito> para quitar o débito referente à sua compra. Os produtos comprados foram: <loop> <#seq>. <produto>, <quantidade>, unidade no valor de R$<ip.preco_unitario> <\\loop>"
+}

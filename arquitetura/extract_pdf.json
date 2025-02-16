@@ -1,0 +1,16 @@
+{"title": "Introdução a Machine Learning e Redes Neurais",  
+ "author":"Sávio Salvarino Teles de Oliveira", 
+ "edition":"1º edição",      
+ "ISBN": "0000000000",            
+ "year": "2025", 
+ "file": "M4_IMLRN_10-12-24.pdf",  
+ "path_in": "D:/ebook10/livros/",
+ "path_out": "D:/ebook10/livros/",
+ "initial_page": 21,  
+ "discard": "#@%$@",
+ "jump_first_line": "False",
+ "character_end_topic": " ", 
+ "can_jump_topic": "True",
+ "local_bd": ".\\chroma_db",
+ "collection": "books"
+}
