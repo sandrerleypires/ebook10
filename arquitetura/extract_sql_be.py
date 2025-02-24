@@ -15,7 +15,7 @@
 #################################################################################################################
 import os
 import json
-from sqlalchemy import create_engine, text
+from db_classes import connect_db, close_db
 import pandas as pd
 import chromadb
 from sentence_transformers import SentenceTransformer
@@ -42,10 +42,10 @@ def replace_chunk(df, template, tupla, seq):
         
 # Executa uma query SQL no banco de dados
 def query_sql(bd, sql): 
-    engine = create_engine(bd)
-    conn = engine.connect()
-    query = conn.execute(text(sql))        
-    df = pd.DataFrame(query.fetchall()).fillna('')
+    connection, cursor = connect_db(bd)
+    df = pd.read_sql_query(sql, connection)
+    close_db(connection)
+    #print(bd, '\n', sql, '\n\n---->', df)
     return df  
 
 # Efetua a inserção de um chunk na base de conhecimento
@@ -102,6 +102,7 @@ def _extract_sql_be(nmsg, message):
     # Percorre o retorno do banco de dados gerando os chunks e os embbedings do conteúdo
     #
     loop_line, template = extract_loop_line(template)
+    #print('++', loop_line, template)
     id_before = ''
     chunk     = ''
     seq       = 1
@@ -128,3 +129,4 @@ def _extract_sql_be(nmsg, message):
     
     # O encerramento da coleção e do Cliente e Feito pelo chromadb
     return nmsg, True, 'Query carregada na base de conhecimento. Coleção: ' + parm_collection
+    
