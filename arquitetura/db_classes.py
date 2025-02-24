@@ -3,17 +3,10 @@
 #
 # Autor     : Sandrerley Ramos Pires                                 05/12/2024            
 #            
-# Finalidade: Esta aplicação tem como objetivo gera o banco de dados para que o 
-#             gerenciador de mensagem. o Modo de uso da aplicação é:
-#            
-#             na linha de comando digite: python gera_db -r -dbname message.db 
-#             onde, as opções:
-#                "-dbname": É o nome do banco de dados a ser criado/recriado. O default é message.db
-#                "-r" recria o banco de dados vazio, caso ele já exista
+# Finalidade: Esta aplicação tem como objetivo oferecer a implementação de diversos
+#             serviços básicos que são oferecidos para um banco de dados relacional.
 #
 #################################################################################################################
-import argparse
-import os
 import sqlite3
 
 # Cria o Banco de dados
@@ -37,7 +30,7 @@ def connect_db(dbname):
     return connection, cursor
 
 # Executa uma query no banco de dados, recebe o sql pronto
-def query(dbname, sql):
+def query(dbname, sql): 
     connection, cursor = connect_db(dbname)
     cursor.execute(sql)
     tabela = cursor.fetchall()
@@ -111,35 +104,5 @@ def create_tables(cursor):
                  status  TEXT NOT NULL
     )"""
     r = cursor.execute(sql_cmd)
-    #print('Retorno da criação de tabelas:', r)
-    return 
-
-#
-# Programa principal
-#
-if __name__ == "__main__":
-    gerar = False
-    
-    # Criar o analisador de argumentos
-    parser = argparse.ArgumentParser(description="Criação da Base de dados para o Gerenciador de Mensagem.")
-    parser.add_argument("-dbname", default="message.db", help="Nome do banco de dados a ser criado)")
-    parser.add_argument("-r", action="store_true", help="Caso já exista, o database será recriado.")
-    args = parser.parse_args()
-
-    # Se pedido a recriaçãao, então deleta o banco de dados antigo
-    print('Criando o db', args.dbname, ' com a opção: ', args.r)
-    if os.path.exists(args.dbname):
-        if args.r:
-            print("O banco de dados já existe. Excluindo-o...")
-            os.remove(args.dbname)
-            gerar = True
-    else:
-        gerar = True
-    #
-    # Cria o novo banco de dados se for necessário
-    if gerar:
-        create_db(args.dbname)
-        connection, cursor = connect_db(args.dbname)
-        create_tables(cursor)
-        close_db(connection)
+    return r
         
